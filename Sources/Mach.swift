@@ -85,7 +85,7 @@ private extension Mach {
                         // if n_value is 0, the symbol refers to an external object.
                         if symbolTable[Int(idx)].n_value != 0 {
                             let nlist: NList = symbolTable.advanced(by: Int(idx)).pointee
-                            let symbolAddress = nlist.n_value + UInt64(imageVirtualMemoryAddress)
+                            let symbolAddress = UInt64(nlist.n_value) + UInt64(imageVirtualMemoryAddress)
                             let symbolNameAddress = stringTableAddress + UInt(nlist.n_un.n_strx)
                             guard let symbolNameRawPointer = UnsafeRawPointer(bitPattern: symbolNameAddress) else { break }
                             let symbolNamePointer = symbolNameRawPointer.bindMemory(to: CChar.self, capacity: 1)
