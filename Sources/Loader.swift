@@ -17,6 +17,19 @@ public extension Loader {
         return result
     }
 
+    static func mach(path: String) -> Mach? {
+        var mach: Mach?
+        enumerate {
+            if $0.path == path {
+                mach = $0
+                return false
+            } else {
+                return true
+            }
+        }
+        return mach
+    }
+
     static func find(path: String, symbol: String) -> Symbol? {
         var mach: Mach?
         enumerate {
