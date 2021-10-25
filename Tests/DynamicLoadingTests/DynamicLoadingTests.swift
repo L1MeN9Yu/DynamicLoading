@@ -1,10 +1,10 @@
 import XCTest
-import zlib
 
 #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 import Darwin.POSIX.dlfcn
 @testable import DynamicLoading
 import MachO.dyld
+import zlib
 
 final class DynamicLoadingTests: XCTestCase {
     func testDyld() {
