@@ -2,10 +2,14 @@
 // Created by Mengyu Li on 2020/10/13.
 //
 
-import Foundation
+extension String {
+    typealias BytesTuple16 = (
+        Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8
+    )
+}
 
 extension String {
-    init(bytesTuple: (Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8)) {
+    init(bytesTuple: BytesTuple16) {
         var table = [Int8](repeating: 0, count: 17)
         withUnsafePointer(to: bytesTuple) { ptr in
             ptr.withMemoryRebound(to: Int8.self, capacity: 16) { ptr in

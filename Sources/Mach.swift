@@ -2,7 +2,8 @@
 // Created by Mengyu Li on 2020/10/13.
 //
 
-import Foundation
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+
 import MachO
 
 #if arch(x86_64) || arch(arm64)
@@ -87,7 +88,9 @@ private extension Mach {
                             let nlist: NList = symbolTable.advanced(by: Int(idx)).pointee
                             let symbolAddress = UInt64(nlist.n_value) + UInt64(imageVirtualMemoryAddress)
                             let symbolNameAddress = stringTableAddress + UInt(nlist.n_un.n_strx)
-                            guard let symbolNameRawPointer = UnsafeRawPointer(bitPattern: symbolNameAddress) else { break }
+                            guard let symbolNameRawPointer = UnsafeRawPointer(bitPattern: symbolNameAddress) else {
+                                break
+                            }
                             let symbolNamePointer = symbolNameRawPointer.bindMemory(to: CChar.self, capacity: 1)
                             let symbolName = String(cString: symbolNamePointer)
                             let symbol = Symbol(address: symbolAddress, name: symbolName)
@@ -104,3 +107,5 @@ private extension Mach {
         }
     }
 }
+
+#endif

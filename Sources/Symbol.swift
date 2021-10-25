@@ -2,8 +2,6 @@
 // Created by Mengyu Li on 2020/10/15.
 //
 
-import Foundation
-
 public struct Symbol {
     public let address: UInt64
     public let name: String

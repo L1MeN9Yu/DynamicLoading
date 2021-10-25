@@ -2,7 +2,7 @@
 // Created by Mengyu Li on 2020/10/12.
 //
 
-import Foundation
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 import MachO.dyld
 
 public enum Loader {}
@@ -59,3 +59,5 @@ private extension Loader {
         }
     }
 }
+
+#endif

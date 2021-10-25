@@ -2,8 +2,6 @@
 // Created by Mengyu Li on 2020/7/27.
 //
 
-import Foundation
-
 public struct Version {
     public let major: UInt
     public let minor: UInt
