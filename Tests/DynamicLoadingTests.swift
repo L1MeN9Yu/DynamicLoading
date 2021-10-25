@@ -20,11 +20,10 @@ final class DynamicLoadingTests: XCTestCase {
         print("\(String(cString: zlibVersion()))")
         typealias zlibVersionFunc = @convention(c) () -> UnsafePointer<Int8>?
         let func1 = unsafeBitCast(address, to: zlibVersionFunc.self)
-        print("\(String(cString: func1()!))")
+        XCTAssertEqual(String(cString: func1()!), String(cString: zlibVersion()))
         let func0 = unsafeBitCast(symbol.functionPointer!, to: zlibVersionFunc.self)
-        print("\(String(cString: func0()!))")
+        XCTAssertEqual(String(cString: func0()!), String(cString: zlibVersion()))
 
-        print("\n")
         zlib.allSymbols().forEach {
             print("\($0.functionPointer!):\($0.name)")
         }
@@ -34,7 +33,7 @@ final class DynamicLoadingTests: XCTestCase {
         if let pointer = Loader.functionPointer(path: "/usr/lib/libz.1.dylib", symbol: "_zlibVersion") {
             typealias zlibVersionFunc = @convention(c) () -> UnsafePointer<Int8>
             let zlibVersion = unsafeBitCast(pointer, to: zlibVersionFunc.self)
-            print("\(String(cString: zlibVersion()))")
+            XCTAssertEqual(String(cString: zlib.zlibVersion()), String(cString: zlibVersion()))
         }
     }
 

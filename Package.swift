@@ -10,6 +10,6 @@ let package = Package(
     ],
     targets: [
         .target(name: "DynamicLoading", path: "Sources"),
-        .testTarget(name: "DynamicLoadingTests", dependencies: ["DynamicLoading"]),
+        .testTarget(name: "DynamicLoadingTests", dependencies: ["DynamicLoading"], path: "Tests"),
     ]
 )
